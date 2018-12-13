@@ -6,7 +6,7 @@ export default class App extends React.Component<{}, {}> {
     return(
       <div id="App">
         <h1>Hello World!!</h1>
-        <div id="map" style={{width: "500px", height: "300px"}}></div>
+        <div id="map" style={{width: "900px", height: "400px"}}></div>
       </div>
     );
   }
@@ -23,8 +23,8 @@ export default class App extends React.Component<{}, {}> {
     ymap.addControl(new Y.SliderZoomControlVertical());
 
     ymap.drawMap(
-      new Y.LatLng(36.550286, 139.929102),
-      17,
+      new Y.LatLng(36.692870, 139.827425),
+      10,
       Y.LayerSetId.NORMAL,
     );
   }
