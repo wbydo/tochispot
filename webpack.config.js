@@ -1,7 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 /*
 * SplitChunksPlugin is enabled by default and replaced
@@ -30,7 +31,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./src/index.html",
       filename: "index.html"
-    })
+    }),
+    new CopyWebpackPlugin([{
+      from: "./src/spot.json",
+      to: "data/spot.json",
+    }]),
   ],
 
   devServer: {
