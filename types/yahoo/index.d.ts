@@ -1,2 +1,9 @@
-declare const Y: any;
-export default Y;
+import { Map } from "./map";
+import { LatLng } from "./latLng";
+import { LayerSetId } from "./layerSetId";
+
+export {
+  Map,
+  LatLng,
+  LayerSetId,
+};

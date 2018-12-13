@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import Y from "yahoo";
+import * as Y from "yahoo";
 
 import App from "./App";
 
@@ -14,9 +14,7 @@ window.onload = () => {
     "map",
     {configure: {
       doubleClickZoom: true,
-      dragging: false,
-      scrollWheelZoom: true,
-      singleClickPan: true,
+      dragging: true,
     }},
   );
   ymap.drawMap(
