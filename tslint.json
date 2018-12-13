@@ -8,5 +8,8 @@
       "interface-name": [true, "never-prefix"],
       "ordered-imports": false
     },
-    "rulesDirectory": []
+    "rulesDirectory": [],
+    "linterOptions": {
+      "exclude": "./types/**/*"
+    }
 }

@@ -17,6 +17,9 @@ window.onload = () => {
       dragging: true,
     }},
   );
+  ymap.addControl(new Y.LayerSetControl());
+  ymap.addControl(new Y.SliderZoomControlVertical());
+
   ymap.drawMap(
     new Y.LatLng(36.550286, 139.929102),
     17,

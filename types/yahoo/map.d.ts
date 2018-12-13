@@ -1,5 +1,6 @@
 import { LatLng } from "./latLng";
 import { LayerSetId } from "./layerSetId";
+import { Control } from "./control";
 
 interface Configure {
   configure: {
@@ -14,6 +15,8 @@ export declare class Map {
       zoomLevel: number,
       layerSetId: LayerSetId,
       ) => void;
+
+  public addControl: (control: Control) => void;
 
   constructor(id: string, configure: Configure);
 }
