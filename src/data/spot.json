@@ -5,9 +5,68 @@
     "lat": 36.881868,
     "lng": 139.991867
   }, {
+    "name": "殺生石",
+    "url": "https://www.tochigiji.or.jp/spot/6996/",
+    "lat": 37.099516,
+    "lng": 139.999852
+  }, {
+    "name": "なかがわ水遊園",
+    "url": "http://tnap.jp/",
+    "lat": 36.790577,
+    "lng": 140.127436
+  }, {
+    "name": "那須平成の森",
+    "url": "http://www.nasuheiseinomori.go.jp/",
+    "lat": 37.117723,
+    "lng": 140.008392
+  }, {
+    "name": "マウントジーンズ那須",
+    "url": "http://www.mtjeans.com/green/",
+    "lat": 37.128186,
+    "lng": 140.015301
+  }, {
     "name": "雲巌寺",
     "url": "http://www.ohtawara.info/spot_detail.html?id=27",
     "lat": 36.853176,
-    "lng": 140.209855
+    "lng": 140.209844
+  }, {
+    "name": "大雄寺",
+    "url": "http://www.daiouji.or.jp/daiouji.html",
+    "lat": 36.865948,
+    "lng": 140.122651
+  }, {
+    "name": "中禅寺湖",
+    "url": "http://www.nikko-kankou.org/spot/12/",
+    "lat": 36.735307,
+    "lng": 139.481821
+  }, {
+    "name": "華厳の滝",
+    "url": "http://www.nikko-kankou.org/spot/5/",
+    "lat": 36.739196,
+    "lng": 139.502026
+  }, {
+    "name": "戦場ヶ原",
+    "url": "http://www.nikko-kankou.org/spot/10/",
+    "lat": 36.776567,
+    "lng": 139.441051
+  }, {
+    "name": "東照宮",
+    "url": "http://www.toshogu.jp/",
+    "lat": 36.757464
+  }, {
+    "name": "那須どうぶつ王国",
+    "url": "https://www.nasu-oukoku.com/",
+    "lat": 37.130120,
+    "lng": 140.037057
+  }, {
+    "name": "那須りんどう湖レイクビュー",
+    "url": "https://www.rindo.co.jp/",
+    "lat": 37.043907,
+    "lng": 140.048650
+  }, {
+    "name": "南ヶ丘牧場",
+    "url": "http://www.minamigaoka.co.jp/",
+    "lat": 37.080134,
+    "lng": 140.001133
   }
 ]
