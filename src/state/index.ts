@@ -2,10 +2,12 @@ import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import reducer from "./reducers";
-import { middleware } from "./middlewares";
+import { MapManageer } from "./middlewares";
+
+const maneger = new MapManageer();
 
 const enhancer = composeWithDevTools(
-  applyMiddleware(middleware),
+  applyMiddleware(maneger.middleware),
 );
 
 const store = createStore(

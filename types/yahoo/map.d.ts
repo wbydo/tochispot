@@ -1,6 +1,7 @@
 import { LatLng } from "./latLng";
 import { LayerSetId } from "./layerSetId";
 import { Control } from "./control";
+import { Marker } from "./marker";
 
 interface Configure {
   configure: {
@@ -17,6 +18,11 @@ export declare class Map {
       ) => void;
 
   public addControl: (control: Control) => void;
+  public addFeature: (marker: Marker) => void;
+  public bind: (
+      type: "click",
+      callback: (arg: LatLng) => void,
+      ) => void;
 
   constructor(id: string, configure: Configure);
 }

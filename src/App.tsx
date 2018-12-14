@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as Y from "yahoo";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 
@@ -23,24 +22,8 @@ class App extends React.Component<RootState & DispatchProps> {
     );
   }
 
-  public componentDidMount = async () => {
+  public componentDidMount = () => {
     this.props.init();
-    const ymap = new Y.Map(
-      "map",
-      {configure: {
-        doubleClickZoom: true,
-        dragging: true,
-      }},
-    );
-    ymap.addControl(new Y.LayerSetControl());
-    ymap.addControl(new Y.SliderZoomControlVertical());
-    ymap.addControl(new Y.ScaleControl());
-
-    ymap.drawMap(
-      new Y.LatLng(36.692870, 139.827425),
-      10,
-      Y.LayerSetId.NORMAL,
-    );
   }
 }
 
