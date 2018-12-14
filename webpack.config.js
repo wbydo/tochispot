@@ -56,7 +56,7 @@ module.exports = {
         typeCheck: true,
       },
     }, {
-      test: /\.css$/,
+      test: /\.s?css$/,
       use: [
         'style-loader',
         {
@@ -66,7 +66,7 @@ module.exports = {
             localIdentName: '[name]-[local]-[hash:base64:5]'
           },
         },
-        'postcss-loader'
+        'sass-loader'
       ]
     }, {
       test: /\.html$/,
