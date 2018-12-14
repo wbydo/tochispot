@@ -11,5 +11,6 @@
     "rulesDirectory": [],
     "linterOptions": {
       "exclude": "./types/**/*"
-    }
+    },
+    "match-default-export-name": true
 }

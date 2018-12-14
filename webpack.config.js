@@ -33,7 +33,7 @@ module.exports = {
       filename: "index.html"
     }),
     new CopyWebpackPlugin([{
-      from: "./src/spot.json",
+      from: "./src/data/spot.json",
       to: "data/spot.json",
     }]),
   ],
