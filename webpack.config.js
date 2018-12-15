@@ -65,8 +65,7 @@ module.exports = {
             modules: true,
             localIdentName: '[name]-[local]-[hash:base64:5]'
           },
-        },
-        'sass-loader'
+        }
       ]
     }, {
       test: /\.html$/,

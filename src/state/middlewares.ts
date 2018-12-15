@@ -61,7 +61,7 @@ export class MapManageer {
     this.ymap.addControl(new Y.ScaleControl());
 
     this.ymap.drawMap(
-      new Y.LatLng(36.9533838095181, 139.84247634374998),
+      new Y.LatLng(36.92374740858853, 139.86856887304685),
       11,
       Y.LayerSetId.NORMAL,
     );
