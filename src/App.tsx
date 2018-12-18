@@ -2,7 +2,7 @@ import * as React from "react";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import AppBar from "react-toolbox/lib/app_bar";
-import { List, ListItem, ListSubHeader, ListDivider, ListCheckbox } from "react-toolbox/lib/list";
+import { List, ListItem } from "react-toolbox/lib/list";
 
 import { RootState, Spot } from "./state/reducers";
 import { init } from "./state/actions";
@@ -40,9 +40,9 @@ class App extends React.Component<RootState & DispatchProps> {
           </div>
           <div
               style={{
+                height: "500px",
                 overflow: "auto",
                 width: "300px",
-                height: "500px"
               }}
               >
             <List selectable={true}>

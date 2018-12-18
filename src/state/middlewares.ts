@@ -53,7 +53,7 @@ export class MapManageer {
     }
   }
 
-  private init = async (next: Dispatch, store: Store) => {
+  private init = async (_: Dispatch, store: Store) => {
     this.ymap = new Y.Map(
       "map",
       {configure: {
@@ -71,10 +71,6 @@ export class MapManageer {
       11,
       Y.LayerSetId.NORMAL,
     );
-
-    this.ymap.bind("click", (arg: Y.LatLng) => {
-      console.log(arg);
-    });
 
     const baseUrl =  location.href;
     const targetUrl = url.resolve(baseUrl, "data/spot.json");
