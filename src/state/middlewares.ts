@@ -36,7 +36,13 @@ export class MapManageer {
           action.payload.spot.lng,
         );
 
-        this.ymap.addFeature(new Y.Marker(latLng));
+        const marker = new Y.Marker(latLng);
+        const anchor = document.createElement( "a" );
+        anchor.text = action.payload.spot.name;
+        anchor.href = action.payload.spot.url;
+        anchor.target = "_blank";
+        marker.bindInfoWindow(anchor);
+        this.ymap.addFeature(marker);
 
         next(action);
         break;

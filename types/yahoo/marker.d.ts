@@ -1,5 +1,6 @@
 import { LatLng } from "./latLng";
+import { Feature } from "./feature";
 
-export declare class Marker {
+export declare class Marker extends Feature {
   constructor(latLng: LatLng)
 }
