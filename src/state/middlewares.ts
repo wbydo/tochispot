@@ -17,6 +17,7 @@ type Middleware = (store: Store) => (next: Dispatch) => (action: Action) => void
 
 export class MapManageer {
   private ymap: Y.Map | undefined;
+  private readonly CENTER = new Y.LatLng(36.92374740858853, 139.86856887304685);
 
   public middleware: Middleware
       = (store: Store) => (next: Dispatch) => async (action: Action) => {
@@ -47,10 +48,29 @@ export class MapManageer {
         next(action);
         break;
 
+      case types.PAN_TO:
+        this.panTo(action);
+        next(action);
+        break;
+
       default:
         next(action);
         break;
     }
+  }
+
+  private panTo = (action: ReturnType<typeof actions.panTo>) => {
+    if (this.ymap === undefined) {
+      throw new Error();
+    }
+
+    const latLng = new Y.LatLng(
+      action.payload.spot.lat,
+      action.payload.spot.lng,
+    );
+
+    this.ymap.panTo(latLng, true);
+    this.ymap.setZoom(13, true, latLng, true);
   }
 
   private init = async (_: Dispatch, store: Store) => {
@@ -67,10 +87,15 @@ export class MapManageer {
     this.ymap.addControl(new Y.ScaleControl());
 
     this.ymap.drawMap(
-      new Y.LatLng(36.92374740858853, 139.86856887304685),
+      this.CENTER,
       11,
       Y.LayerSetId.NORMAL,
     );
+
+    this.ymap.bind("click", () => {
+      this.ymap!.panTo(this.CENTER, true);
+      this.ymap!.setZoom(11, true, this.CENTER, true);
+    });
 
     const baseUrl =  location.href;
     const targetUrl = url.resolve(baseUrl, "data/spot.json");

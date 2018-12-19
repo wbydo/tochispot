@@ -15,3 +15,12 @@ export const addSpot = (spot: Spot) => {
     type: types.ADD_SPOT,
   };
 };
+
+export const panTo = (spot: Spot) => {
+  return {
+    payload: {
+      spot,
+    },
+    type: types.PAN_TO,
+  };
+};

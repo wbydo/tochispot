@@ -24,5 +24,13 @@ export declare class Map {
       callback: (arg: LatLng) => void,
       ) => void;
 
+  public panTo: (center: LatLng, animation?: boolean) => void;
+  public setZoom: (
+      zoom: number,
+      animation?: boolean,
+      latlng?: LatLng,
+      center?: boolean,
+      ) => void;
+
   constructor(id: string, configure: Configure);
 }

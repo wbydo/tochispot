@@ -1,38 +1,18 @@
 import * as React from "react";
 
 import { List, ListItem } from "react-toolbox/lib/list";
-import { Chip } from "react-toolbox/lib/chip";
-import Link from "react-toolbox/lib/link";
+import { RootState } from "../state";
 
-interface Spot {
-  name: string;
-  genres: string[];
-}
+import SideBarItem from "../containers/sidebar_item";
 
-interface Props {
-  spots: Spot[] | null;
-}
-
-const itemContent = (spot: Spot) => {
-  const {name, genres} = spot;
-  return (
-    <div>
-      <a href="#">{name}</a>
-      {genres.map((genre) => {
-        return(
-          <Chip>
-            <Link href="#">{genre}</Link>
-          </Chip>
-        );
-      })}
-    </div>
-  );
-};
+type Props = RootState;
 
 const SideBar = (props: Props) => {
   return(
     <List selectable={true}>
-      {props.spots && props.spots.map((spot: Spot) => <ListItem itemContent={itemContent(spot)} selectable={false} />)}
+      {props.spots && props.spots.map((spot) => {
+        return <ListItem itemContent={<SideBarItem spot={spot}/>} selectable={false} />;
+      })}
     </List>
   );
 };
