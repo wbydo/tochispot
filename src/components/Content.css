@@ -1,0 +1,18 @@
+.flexContainer {
+  display: flex;
+  position: fixed;
+  top: 80px;
+  width: 100%;
+}
+
+.map {
+  height: 500px;
+  position: relative;
+  width: calc(100% - 300px);
+}
+
+.sideBar {
+  height: 500px;
+  overflow: auto;
+  width: 300px;
+}
