@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import AppBar from "react-toolbox/lib/app_bar";
 import { List, ListItem } from "react-toolbox/lib/list";
+import { Chip } from "react-toolbox/lib/chip";
+import Link from "react-toolbox/lib/link";
 
 import { RootState, Spot } from "./state/reducers";
 import { init } from "./state/actions";
@@ -46,7 +48,7 @@ class App extends React.Component<RootState & DispatchProps> {
               }}
               >
             <List selectable={true}>
-              {this.props.spots && this.props.spots.map((spot: Spot) => <ListItem caption={spot.name} />)}
+              {this.props.spots && this.props.spots.map((spot: Spot) => <ListItem itemContent={<div><a href="#">{spot.name}</a><Chip><Link href="#">{spot.genres[0]}</Link></Chip></div>} selectable={false} />)}
             </List>
           </div>
         </div>

@@ -10,6 +10,7 @@ export interface Spot {
   url: string;
   lat: number;
   lng: number;
+  genres: string[];
 }
 
 export interface RootState {
