@@ -7,7 +7,7 @@ const App = () => {
   return(
     <div id="App">
       <AppBar
-          title="とちすぽっと！"
+          title="とちすぽっと！（β版）"
           fixed={true}
           scrollHide={true}
           flat={true}
