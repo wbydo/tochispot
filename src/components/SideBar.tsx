@@ -14,12 +14,17 @@ interface Props {
 }
 
 const itemContent = (spot: Spot) => {
+  const {name, genres} = spot;
   return (
     <div>
-      <a href="#">{spot.name}</a>
-      <Chip>
-        <Link href="#">{spot.genres[0]}</Link>
-      </Chip>
+      <a href="#">{name}</a>
+      {genres.map((genre) => {
+        return(
+          <Chip>
+            <Link href="#">{genre}</Link>
+          </Chip>
+        );
+      })}
     </div>
   );
 };

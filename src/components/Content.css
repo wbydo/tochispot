@@ -1,3 +1,5 @@
+@value sideBarWidth: 450px;
+
 .flexContainer {
   display: flex;
   position: fixed;
@@ -8,11 +10,11 @@
 .map {
   height: 500px;
   position: relative;
-  width: calc(100% - 300px);
+  width: calc(100% - sideBarWidth);
 }
 
 .sideBar {
   height: 500px;
   overflow: auto;
-  width: 300px;
+  width: sideBarWidth;
 }
