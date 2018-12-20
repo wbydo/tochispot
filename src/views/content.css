@@ -1,6 +1,6 @@
 @value sideBarWidth: 450px;
 @value contentHeight: 600px;
-@value genresHeight: 80px;
+@value genresHeight: 40px;
 
 .flexContainer {
   display: flex;
@@ -29,5 +29,5 @@
 .genres {
   height: genresHeight;
   width: 100%;
-  background-color: red;
+  position: relative;
 }
