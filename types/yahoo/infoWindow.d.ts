@@ -7,6 +7,9 @@ export interface InfoOptions {
 }
 
 declare class InfoWindow {
+  public show: () => void;
+  public hide: () => void;
+
   constructor(
       container: Node,
       position: Point,

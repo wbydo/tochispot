@@ -16,8 +16,12 @@ interface Store {
 type Middleware = (store: Store) => (next: Dispatch) => (action: Action) => void;
 
 export class MapManageer {
-  private ymap: Y.Map | undefined;
   private readonly CENTER = new Y.LatLng(36.92374740858853, 139.86856887304685);
+  private readonly DEFAULT_ZOOM = 11;
+
+  private ymap: Y.Map | undefined;
+  private currentInfoWindow: Y.InfoWindow | null = null;
+  private markers = new Map<string, {marker: Y.Marker, anchor: HTMLAnchorElement}>();
 
   public middleware: Middleware
       = (store: Store) => (next: Dispatch) => async (action: Action) => {
@@ -28,23 +32,7 @@ export class MapManageer {
         break;
 
       case types.ADD_SPOT:
-        if (this.ymap === undefined) {
-          throw new Error();
-        }
-
-        const latLng = new Y.LatLng(
-          action.payload.spot.lat,
-          action.payload.spot.lng,
-        );
-
-        const marker = new Y.Marker(latLng);
-        const anchor = document.createElement( "a" );
-        anchor.text = action.payload.spot.name;
-        anchor.href = action.payload.spot.url;
-        anchor.target = "_blank";
-        marker.bindInfoWindow(anchor);
-        this.ymap.addFeature(marker);
-
+        this.addSpot(action);
         next(action);
         break;
 
@@ -59,18 +47,48 @@ export class MapManageer {
     }
   }
 
-  private panTo = (action: ReturnType<typeof actions.panTo>) => {
+  private addSpot = (action: ReturnType<typeof actions.addSpot>) => {
     if (this.ymap === undefined) {
       throw new Error();
     }
 
+    const spot = action.payload.spot;
     const latLng = new Y.LatLng(
-      action.payload.spot.lat,
-      action.payload.spot.lng,
+      spot.lat,
+      spot.lng,
+    );
+
+    const marker = new Y.Marker(latLng);
+    const anchor = document.createElement( "a" );
+    anchor.text = spot.name;
+    anchor.href = spot.url;
+    anchor.target = "_blank";
+
+    marker.bind("click", () => {
+      this.currentInfoWindow = marker.openInfoWindow(anchor);
+    });
+
+    this.markers.set(spot.name, {marker, anchor});
+    this.ymap.addFeature(marker);
+  }
+
+  private panTo = (action: ReturnType<typeof actions.panTo>) => {
+    if (this.ymap === undefined) {
+      throw new Error();
+    }
+    const spot = action.payload.spot;
+
+    const latLng = new Y.LatLng(
+      spot.lat,
+      spot.lng,
     );
 
     this.ymap.panTo(latLng, true);
     this.ymap.setZoom(13, true, latLng, true);
+    const result = this.markers.get(spot.name);
+    if (result) {
+      this.currentInfoWindow = result.marker.openInfoWindow(result.anchor);
+    }
   }
 
   private init = async (_: Dispatch, store: Store) => {
@@ -88,13 +106,20 @@ export class MapManageer {
 
     this.ymap.drawMap(
       this.CENTER,
-      11,
+      this.DEFAULT_ZOOM,
       Y.LayerSetId.NORMAL,
     );
 
     this.ymap.bind("click", () => {
-      this.ymap!.panTo(this.CENTER, true);
-      this.ymap!.setZoom(11, true, this.CENTER, true);
+      if (this.ymap === undefined) {
+        throw new Error();
+      }
+      this.ymap.panTo(this.CENTER, true);
+      this.ymap.setZoom(11, true, this.CENTER, true);
+
+      if (this.currentInfoWindow) {
+        this.currentInfoWindow.hide();
+      }
     });
 
     const baseUrl =  location.href;
