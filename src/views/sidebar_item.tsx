@@ -1,9 +1,11 @@
 import * as React from "react";
+import { Dispatch } from "redux";
+import { connect } from "react-redux";
 
 import { Chip } from "react-toolbox/lib/chip";
 import Link from "react-toolbox/lib/link";
 
-import { Spot } from "../state";
+import { Spot, actions } from "../state";
 
 interface SpotProps {
   spot: Spot;
@@ -27,4 +29,14 @@ const SideBarItem = (spotProps: SpotProps) => {
   );
 };
 
-export default SideBarItem;
+const mapDispatchProps = (dispatch: Dispatch) => {
+  return {
+    panTo: (spot: Spot) => dispatch(actions.panTo(spot)),
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchProps,
+  ({}, {panTo}, ownProps: {spot: Spot}) => ({panTo, spot: ownProps.spot}),
+)(SideBarItem);

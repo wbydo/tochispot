@@ -1,7 +1,7 @@
 import * as React from "react";
 import AppBar from "react-toolbox/lib/app_bar";
 
-import Content from "./containers/content";
+import Content from "./views/content";
 
 const App = () => {
   return(

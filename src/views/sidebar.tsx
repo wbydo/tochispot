@@ -1,11 +1,18 @@
 import * as React from "react";
-
+import { connect } from "react-redux";
 import { List, ListItem } from "react-toolbox/lib/list";
+
+import SideBarItem from "./sidebar_item";
+
 import { RootState } from "../state";
 
-import SideBarItem from "../containers/sidebar_item";
-
 type Props = RootState;
+
+const mapStateProps = (state: RootState) => {
+  return {
+    spots: state.spots,
+  };
+};
 
 const SideBar = (props: Props) => {
   return(
@@ -17,4 +24,4 @@ const SideBar = (props: Props) => {
   );
 };
 
-export default SideBar;
+export default connect(mapStateProps)(SideBar);
