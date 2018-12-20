@@ -13,7 +13,11 @@ import SideBar from "./sidebar";
 
 interface Props {
   init: () => void;
-  genres: Set<string> | undefined;
+  filter: (visibleGenre: string) => void;
+  genres?: {
+    active: string | null,
+    others: Set<string>,
+  };
 }
 
 class Content extends React.Component<Props> {
@@ -23,13 +27,7 @@ class Content extends React.Component<Props> {
         <div className={styles.main}>
           <div id="map" className={styles.map}></div>
           <div className={styles.genres}>
-            {this.props.genres && Array(...this.props.genres.values()).map((genre) => {
-              return (
-                <Chip>
-                  <Link href="#">{genre}</Link>
-                </Chip>
-              );
-            })}
+            {this.chips()}
           </div>
         </div>
         <div className={styles.sideBar}>
@@ -42,6 +40,33 @@ class Content extends React.Component<Props> {
   public componentDidMount = () => {
     this.props.init();
   }
+
+  private genreToChip = (genre: string) => {
+    return (
+      <Chip>
+        <Link href="#" onClick={() => this.props.filter(genre)}>{genre}</Link>
+      </Chip>
+    );
+  }
+
+  private chips = () => {
+    const {genres} = this.props;
+
+    if (genres === undefined) {
+      return null;
+    }
+
+    if (genres.active !== null) {
+      return [
+        this.genreToChip(genres.active),
+        ...Array(...genres.others.values()).map((genre) => this.genreToChip(genre)),
+      ];
+    } else {
+      return [
+        ...Array(...genres.others.values()).map((genre) => this.genreToChip(genre)),
+      ];
+    }
+  }
 }
 
 const mapStateToProps = (state: RootState) => {
@@ -52,6 +77,7 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
+    filter: (visibleGenre: string) => dispatch(actions.filter(visibleGenre)),
     init: () => dispatch(actions.init()),
   };
 };

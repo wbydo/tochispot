@@ -10,10 +10,11 @@ import { SpotWithVisibility, actions } from "../state";
 interface SpotProps {
   spot: SpotWithVisibility;
   panTo: (spot: SpotWithVisibility) => void;
+  filter: (visibleGenre: string) => void;
 }
 
 const SideBarItem = (spotProps: SpotProps) => {
-  const {spot, panTo} = spotProps;
+  const {spot, panTo, filter} = spotProps;
   const {name, genres} = spot;
   return (
     <div>
@@ -21,7 +22,7 @@ const SideBarItem = (spotProps: SpotProps) => {
       {genres.map((genre) => {
         return(
           <Chip>
-            <Link href="#">{genre}</Link>
+            <Link href="#" onClick={() => filter(genre)}>{genre}</Link>
           </Chip>
         );
       })}
@@ -31,6 +32,7 @@ const SideBarItem = (spotProps: SpotProps) => {
 
 const mapDispatchProps = (dispatch: Dispatch) => {
   return {
+    filter: (visibleGenre: string) => dispatch(actions.filter(visibleGenre)),
     panTo: (spot: SpotWithVisibility) => dispatch(actions.panTo(spot)),
   };
 };
@@ -38,5 +40,5 @@ const mapDispatchProps = (dispatch: Dispatch) => {
 export default connect(
   null,
   mapDispatchProps,
-  ({}, {panTo}, ownProps: {spot: SpotWithVisibility}) => ({panTo, spot: ownProps.spot}),
+  ({}, {panTo, filter}, ownProps: {spot: SpotWithVisibility}) => ({panTo, filter, spot: ownProps.spot}),
 )(SideBarItem);

@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es6",
+    "lib": ["DOM", "ES7", "DOM.Iterable", "ScriptHost"],
     "module": "commonjs",
     "jsx": "react",
     "outDir": "./dist",

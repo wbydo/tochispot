@@ -17,7 +17,7 @@ const mapStateProps = (state: RootState) => {
 const SideBar = (props: Props) => {
   return(
     <List selectable={true}>
-      {props.spots && props.spots.map((spot) => {
+      {props.spots && props.spots.filter((spot) => spot.visible).map((spot) => {
         return <ListItem itemContent={<SideBarItem spot={spot}/>} selectable={false} />;
       })}
     </List>

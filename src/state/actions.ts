@@ -24,3 +24,12 @@ export const panTo = (spot: Spot) => {
     type: types.PAN_TO,
   };
 };
+
+export const filter = (visibleGenre: string) => {
+  return {
+    payload: {
+      visibleGenre,
+    },
+    type: types.FILTER,
+  };
+};
