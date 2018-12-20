@@ -4,7 +4,7 @@ import * as Y from "yahoo";
 
 import * as types from "./types";
 import * as actions from "./actions";
-import { RootState, Action} from "./reducers";
+import { RootState, Action, SpotWithVisibility } from "./reducers";
 
 export interface Spot {
   name: string;
@@ -49,9 +49,15 @@ export class MapManageer {
         next(action);
         break;
 
+      case types.FILTER:
+        next(action);
+        this.syncMarkerVisibility(store.getState().spots!);
+        break;
+
       case types.RESET:
         this.resetMap();
         next(action);
+        this.syncMarkerVisibility(store.getState().spots!);
         break;
 
       default:
@@ -83,6 +89,34 @@ export class MapManageer {
 
     this.markers.set(spot.name, {marker, anchor});
     this.ymap.addFeature(marker);
+  }
+
+  private removeAllMarker = () => {
+    if (this.ymap === undefined) {
+      throw new Error();
+    }
+
+    for (const {marker} of this.markers.values()) {
+      this.ymap.removeFeature(marker);
+    }
+  }
+
+  private syncMarkerVisibility = (spots: SpotWithVisibility[]) => {
+    this.removeAllMarker();
+
+    if (this.ymap === undefined) {
+      throw new Error();
+    }
+
+    for (const spot of spots) {
+      const {name, visible} = spot;
+      if (visible) {
+        const value = this.markers.get(name);
+        if (value) {
+          this.ymap.addFeature(value.marker);
+        }
+      }
+    }
   }
 
   private panTo = (action: ReturnType<typeof actions.panTo>) => {

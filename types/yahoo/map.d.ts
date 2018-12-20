@@ -23,6 +23,7 @@ export declare class Map {
       type: "click",
       callback: (arg: LatLng) => void,
       ) => void;
+  public removeFeature: (marker: Marker) => void;
 
   public panTo: (center: LatLng, animation?: boolean) => void;
   public setZoom: (
