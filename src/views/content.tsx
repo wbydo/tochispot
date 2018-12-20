@@ -22,7 +22,10 @@ class Content extends React.Component<Props> {
   public render() {
     return(
       <div className={styles.flexContainer}>
-        <div id="map" className={styles.map}></div>
+        <div className={styles.main}>
+          <div id="map" className={styles.map}></div>
+          <div className={styles.genres}>hogefugapiyo</div>
+        </div>
         <div className={styles.sideBar}>
           <SideBar />
         </div>
