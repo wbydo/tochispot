@@ -49,6 +49,11 @@ export class MapManageer {
         next(action);
         break;
 
+      case types.RESET:
+        this.resetMap();
+        next(action);
+        break;
+
       default:
         next(action);
         break;
@@ -99,6 +104,18 @@ export class MapManageer {
     }
   }
 
+  private resetMap = () => {
+    if (this.ymap === undefined) {
+      throw new Error();
+    }
+    this.ymap.panTo(this.CENTER, true);
+    this.ymap.setZoom(11, true, this.CENTER, true);
+
+    if (this.currentInfoWindow) {
+      this.currentInfoWindow.hide();
+    }
+  }
+
   private init = async (_: Dispatch, store: Store) => {
     this.ymap = new Y.Map(
       "map",
@@ -118,17 +135,7 @@ export class MapManageer {
       Y.LayerSetId.NORMAL,
     );
 
-    this.ymap.bind("click", () => {
-      if (this.ymap === undefined) {
-        throw new Error();
-      }
-      this.ymap.panTo(this.CENTER, true);
-      this.ymap.setZoom(11, true, this.CENTER, true);
-
-      if (this.currentInfoWindow) {
-        this.currentInfoWindow.hide();
-      }
-    });
+    this.ymap.bind("click", () => store.dispatch(actions.reset()));
 
     const baseUrl =  location.href;
     const targetUrl = url.resolve(baseUrl, "data/spot.json");
