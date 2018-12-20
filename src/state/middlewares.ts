@@ -4,9 +4,17 @@ import * as Y from "yahoo";
 
 import * as types from "./types";
 import * as actions from "./actions";
-import { RootState, Action, Spot } from "./reducers";
+import { RootState, Action} from "./reducers";
 
-type JsonResult = Spot[];
+export interface Spot {
+  name: string;
+  url: string;
+  lat: number;
+  lng: number;
+  genres: string[];
+}
+
+type ContentOfJson = Spot[];
 
 interface Store {
   getState: () => RootState;
@@ -125,7 +133,7 @@ export class MapManageer {
     const baseUrl =  location.href;
     const targetUrl = url.resolve(baseUrl, "data/spot.json");
     const resp = await fetch(targetUrl);
-    const result = (await resp.json()) as JsonResult;
+    const result = (await resp.json()) as ContentOfJson;
 
     for (const spot of result) {
       store.dispatch(actions.addSpot(spot));

@@ -5,16 +5,17 @@ import { Action as _Action } from "./util";
 
 export type Action = _Action<typeof actions>;
 
-export interface Spot {
+export interface SpotWithVisibility {
   name: string;
   url: string;
   lat: number;
   lng: number;
   genres: string[];
+  visible: boolean;
 }
 
 export interface RootState {
-  spots?: Spot[];
+  spots?: SpotWithVisibility[];
   genres?: Set<string>;
 }
 
@@ -22,17 +23,17 @@ const addSpot = (state: RootState, action: ReturnType<typeof actions.addSpot>) =
   if (state.genres === undefined || state.spots === undefined) {
     return {
       genres: new Set(action.payload.spot.genres),
-      spots: [action.payload.spot],
+      spots: [{...action.payload.spot, visible: true}],
     };
   } else {
     return {
       genres: new Set([...action.payload.spot.genres, ...state.genres]),
-      spots: [action.payload.spot, ...state.spots],
+      spots: [{...action.payload.spot, visible: true}, ...state.spots],
     };
   }
 };
 
-const reducer = (state: RootState | undefined, action: Action) => {
+const reducer = (state: RootState | undefined, action: Action): RootState => {
   if (state === undefined) {
     return {};
   }

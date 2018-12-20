@@ -1,5 +1,5 @@
 import * as types from "./types";
-import { Spot } from "./reducers";
+import { Spot } from "./middlewares";
 
 export const init = () => {
   return {

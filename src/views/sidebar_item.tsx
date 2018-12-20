@@ -5,11 +5,11 @@ import { connect } from "react-redux";
 import { Chip } from "react-toolbox/lib/chip";
 import Link from "react-toolbox/lib/link";
 
-import { Spot, actions } from "../state";
+import { SpotWithVisibility, actions } from "../state";
 
 interface SpotProps {
-  spot: Spot;
-  panTo: (spot: Spot) => void;
+  spot: SpotWithVisibility;
+  panTo: (spot: SpotWithVisibility) => void;
 }
 
 const SideBarItem = (spotProps: SpotProps) => {
@@ -31,12 +31,12 @@ const SideBarItem = (spotProps: SpotProps) => {
 
 const mapDispatchProps = (dispatch: Dispatch) => {
   return {
-    panTo: (spot: Spot) => dispatch(actions.panTo(spot)),
+    panTo: (spot: SpotWithVisibility) => dispatch(actions.panTo(spot)),
   };
 };
 
 export default connect(
   null,
   mapDispatchProps,
-  ({}, {panTo}, ownProps: {spot: Spot}) => ({panTo, spot: ownProps.spot}),
+  ({}, {panTo}, ownProps: {spot: SpotWithVisibility}) => ({panTo, spot: ownProps.spot}),
 )(SideBarItem);
