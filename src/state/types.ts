@@ -9,3 +9,6 @@ export const PAN_TO: "tochispot/PAN_TO"
 
 export const FILTER: "tochispot/FILTER"
     = "tochispot/FILTER";
+
+export const RESET: "tochispot/RESET"
+    = "tochispot/RESET";

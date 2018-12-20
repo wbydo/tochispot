@@ -70,6 +70,23 @@ const filter = (state: RootState, action: ReturnType<typeof actions.filter>) => 
   };
 };
 
+const reset = (state: RootState, action: ReturnType<typeof actions.reset>) => {
+  if (state.genres === undefined || state.spots === undefined) {
+    throw new Error();
+  }
+
+  const spots = state.spots.map((spot) => ({...spot, visible: true}));
+  const others = extractActiveGenres(spots);
+
+  return {
+    genres: {
+      active: null,
+      others,
+    },
+    spots,
+    };
+};
+
 const reducer = (state: RootState | undefined, action: Action): RootState => {
   if (state === undefined) {
     return {};
@@ -80,6 +97,9 @@ const reducer = (state: RootState | undefined, action: Action): RootState => {
 
     case types.FILTER:
       return filter(state, action);
+
+    case types.RESET:
+      return reset(state, action);
 
     default:
       return state;

@@ -33,3 +33,9 @@ export const filter = (visibleGenre: string) => {
     type: types.FILTER,
   };
 };
+
+export const reset = () => {
+  return {
+    type: types.RESET,
+  };
+};

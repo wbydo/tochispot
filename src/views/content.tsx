@@ -3,7 +3,6 @@ import { Dispatch } from "redux";
 import { connect } from "react-redux";
 
 import { Chip } from "react-toolbox/lib/chip";
-import Link from "react-toolbox/lib/link";
 
 import { actions, RootState } from "../state";
 
@@ -14,6 +13,7 @@ import SideBar from "./sidebar";
 interface Props {
   init: () => void;
   filter: (visibleGenre: string) => void;
+  reset: () => void;
   genres?: {
     active: string | null,
     others: Set<string>,
@@ -41,10 +41,10 @@ class Content extends React.Component<Props> {
     this.props.init();
   }
 
-  private genreToChip = (genre: string) => {
+  private genreToChip = (genre: string, active: boolean) => {
     return (
-      <Chip>
-        <Link href="#" onClick={() => this.props.filter(genre)}>{genre}</Link>
+      <Chip deletable={active} onDeleteClick={() => active && this.props.reset()}>
+        <a href="#" onClick={() => this.props.filter(genre)}>{genre}</a>
       </Chip>
     );
   }
@@ -58,12 +58,12 @@ class Content extends React.Component<Props> {
 
     if (genres.active !== null) {
       return [
-        this.genreToChip(genres.active),
-        ...Array(...genres.others.values()).map((genre) => this.genreToChip(genre)),
+        this.genreToChip(genres.active, true),
+        ...Array(...genres.others.values()).map((genre) => this.genreToChip(genre, false)),
       ];
     } else {
       return [
-        ...Array(...genres.others.values()).map((genre) => this.genreToChip(genre)),
+        ...Array(...genres.others.values()).map((genre) => this.genreToChip(genre, false)),
       ];
     }
   }
@@ -79,6 +79,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     filter: (visibleGenre: string) => dispatch(actions.filter(visibleGenre)),
     init: () => dispatch(actions.init()),
+    reset: () => dispatch(actions.reset()),
   };
 };
 
