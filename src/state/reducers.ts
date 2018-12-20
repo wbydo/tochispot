@@ -14,14 +14,19 @@ export interface Spot {
 }
 
 export interface RootState {
-  spots: Spot[] | null;
+  spots?: Spot[];
+  genres?: Set<string>;
 }
 
 const addSpot = (state: RootState, action: ReturnType<typeof actions.addSpot>) => {
-  if (state.spots === null) {
-    return { spots: [action.payload.spot] };
+  if (state.genres === undefined || state.spots === undefined) {
+    return {
+      genres: new Set(action.payload.spot.genres),
+      spots: [action.payload.spot],
+    };
   } else {
     return {
+      genres: new Set([...action.payload.spot.genres, ...state.genres]),
       spots: [action.payload.spot, ...state.spots],
     };
   }
@@ -29,7 +34,7 @@ const addSpot = (state: RootState, action: ReturnType<typeof actions.addSpot>) =
 
 const reducer = (state: RootState | undefined, action: Action) => {
   if (state === undefined) {
-    return {spots: null};
+    return {};
   }
   switch (action.type) {
     case types.ADD_SPOT:
